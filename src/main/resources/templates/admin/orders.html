@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management - SportyShoes Admin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.8rem 1.2rem;
+            margin: 0.2rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        .main-content {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .brand-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        .filter-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .orders-table {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .table th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            font-weight: 600;
+        }
+        .status-update-form {
+            display: inline-block;
+        }
+        .badge-large {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar">
+                <div class="d-flex flex-column p-3">
+                    <h4 class="text-white mb-4">
+                        <i class="fas fa-running"></i> SportyShoes Admin
+                    </h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                        <a class="nav-link" href="/admin/products">
+                            <i class="fas fa-box me-2"></i> Products
+                        </a>
+
+                        <a class="nav-link active" href="/admin/orders">
+                            <i class="fas fa-shopping-cart me-2"></i> Orders
+                        </a>
+                        <a class="nav-link" href="/admin/users">
+                            <i class="fas fa-users me-2"></i> Customers
+                        </a>
+                        
+                        <hr class="text-white">
+                        <a class="nav-link" href="/admin/profile">
+                            <i class="fas fa-user me-2"></i> Profile
+                        </a>
+                        <a class="nav-link" href="/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <div class="p-4">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="brand-title">Order Management</h2>
+                        <div class="text-muted">
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            Total Orders: <span class="fw-bold" th:text="${#lists.size(orders)}">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Success/Error Messages -->
+                    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span th:text="${success}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span th:text="${error}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="card filter-card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">
+                                Filter Orders
+                            </h5>
+                            <form method="get" th:action="@{/admin/orders}">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-select" name="status" id="status">
+                                            <option value="">All Statuses</option>
+                                            <option th:each="status : ${orderStatuses}" 
+                                                    th:value="${status.name()}" 
+                                                    th:text="${status.name()}"
+                                                    th:selected="${selectedStatus == status.name()}">PENDING</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="category" class="form-label">Category</label>
+                                        <select class="form-select" name="category" id="category">
+                                            <option value="">All Categories</option>
+                                            <option th:each="category : ${categories}" 
+                                                    th:value="${category.id}" 
+                                                    th:text="${category.name}"
+                                                    th:selected="${selectedCategory == category.id}">Category</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="startDate" class="form-label">Start Date</label>
+                                        <input type="date" class="form-control" name="startDate" id="startDate" 
+                                               th:value="${startDate}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="endDate" class="form-label">End Date</label>
+                                        <input type="date" class="form-control" name="endDate" id="endDate" 
+                                               th:value="${endDate}">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary me-2">
+                                            <i class="fas fa-search me-2"></i>Apply Filters
+                                        </button>
+                                        <a href="/admin/orders" class="btn btn-outline-secondary">
+                                            <i class="fas fa-times me-2"></i>Clear Filters
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Orders Table -->
+                    <div class="orders-table">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Order Date</th>
+                                        <th>Total Amount</th>
+                                        <th>Payment Method</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="order : ${orders}">
+                                        <td>
+                                            <strong>#<span th:text="${order.id}">001</span></strong>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <strong th:text="${order.user.firstName + ' ' + order.user.lastName}">John Doe</strong><br>
+                                                <small class="text-muted" th:text="${order.user.email}">john@example.com</small>
+                                            </div>
+                                        </td>
+                                        <td th:text="${#temporals.format(order.orderDate, 'MMM dd, yyyy HH:mm')}">Jan 15, 2024 14:30</td>
+                                        <td>
+                                            <strong>₹<span th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 2, 'POINT')}">1,299.00</span></strong>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary" th:text="${order.paymentMethod ?: 'N/A'}">COD</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-large" 
+                                                  th:classappend="${order.status.name() == 'PENDING'} ? 'bg-warning text-dark' : 
+                                                                 (${order.status.name() == 'CONFIRMED'} ? 'bg-info' : 
+                                                                 (${order.status.name() == 'SHIPPED'} ? 'bg-primary' :
+                                                                 (${order.status.name() == 'DELIVERED'} ? 'bg-success' : 'bg-danger')))"
+                                                  th:text="${order.status.name()}">PENDING</span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <!-- Status Update Dropdown -->
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" 
+                                                            type="button" data-bs-toggle="dropdown">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li th:each="status : ${orderStatuses}">
+                                                            <form th:action="@{/admin/orders/{id}/status(id=${order.id})}" 
+                                                                  method="post" class="status-update-form">
+                                                                <button type="submit" class="dropdown-item" 
+                                                                        th:name="status" th:value="${status.name()}"
+                                                                        th:disabled="${order.status == status}">
+                                                                    <i class="fas fa-circle me-2" 
+                                                                       th:classappend="${status.name() == 'PENDING'} ? 'text-warning' : 
+                                                                                      (${status.name() == 'CONFIRMED'} ? 'text-info' : 
+                                                                                      (${status.name() == 'SHIPPED'} ? 'text-primary' :
+                                                                                      (${status.name() == 'DELIVERED'} ? 'text-success' : 'text-danger')))"></i>
+                                                                    <span th:text="${status.name()}">STATUS</span>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                
+                                                <!-- View Customer Orders -->
+                                                <a th:href="@{/admin/users/{id}/orders(id=${order.user.id})}" 
+                                                   class="btn btn-sm btn-outline-info" title="View Customer Orders">
+                                                    <i class="fas fa-user"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#lists.isEmpty(orders)}">
+                                        <td colspan="7" class="text-center py-5">
+                                            <div class="text-muted">
+                                                <i class="fas fa-shopping-cart fa-3x mb-3"></i><br>
+                                                <h5>No orders found</h5>
+                                                <p>Try adjusting your filters or check back later.</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary (if orders exist) -->
+         
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Auto-submit form on status change confirmation
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusForms = document.querySelectorAll('.status-update-form');
+            statusForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const statusValue = e.target.querySelector('button[type="submit"]').value;
+                    if (!confirm(`Are you sure you want to change the order status to ${statusValue}?`)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - SportyShoes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.8rem 1.2rem;
+            margin: 0.2rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        .main-content {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .form-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+        }
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .required {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar">
+                <div class="d-flex flex-column p-3">
+                    <h4 class="text-white mb-4">
+                        <i class="fas fa-running"></i> SportyShoes Admin
+                    </h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
+                        <a class="nav-link active" href="/admin/products">
+                            <i class="fas fa-box me-2"></i> Products
+                        </a>
+
+                        <a class="nav-link" href="/admin/orders">
+                            <i class="fas fa-shopping-cart me-2"></i> Orders
+                        </a>
+                        <a class="nav-link" href="/admin/users">
+                            <i class="fas fa-users me-2"></i> Customers
+                        </a>
+
+                        <hr class="text-white">
+                        <a class="nav-link" href="/admin/profile">
+                            <i class="fas fa-user me-2"></i> Profile
+                        </a>
+                        <a class="nav-link" href="/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <div class="p-4">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Add New Product</h2>
+                        <a href="/admin/products" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Products
+                        </a>
+                    </div>
+
+                    <!-- Alert Messages -->
+                    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span th:text="${success}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <span th:text="${error}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <!-- Product Form -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="card form-card">
+                                <div class="card-body p-4">
+                                    <form th:action="@{/admin/products/add}" th:object="${product}" method="post">
+                                        <div class="row">
+                                            <!-- Product Image Preview -->
+                                            <div class="col-md-3 text-center mb-4">
+                                                <label class="form-label fw-bold">Product Image</label>
+                                                <div class="image-preview" id="imagePreview">
+                                                    <div class="text-muted">
+                                                        <i class="fas fa-image fa-3x mb-2"></i>
+                                                        <p>Image Preview</p>
+                                                    </div>
+                                                </div>
+                                                <input type="url" class="form-control" 
+                                                       th:field="*{imageUrl}" 
+                                                       id="imageUrl"
+                                                       placeholder="Enter image URL"
+                                                       onchange="previewImage()">
+                                                <div class="form-text">Enter a valid image URL</div>
+                                            </div>
+
+                                            <!-- Product Details -->
+                                            <div class="col-md-9">
+                                                <div class="row">
+                                                    <!-- Product Name -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="name" class="form-label">Product Name <span class="required">*</span></label>
+                                                        <input type="text" class="form-control" 
+                                                               th:field="*{name}" 
+                                                               id="name" 
+                                                               placeholder="Enter product name"
+                                                               required>
+                                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                                                    </div>
+
+                                                    <!-- Brand -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="brand" class="form-label">Brand</label>
+                                                        <input type="text" class="form-control" 
+                                                               th:field="*{brand}" 
+                                                               id="brand" 
+                                                               placeholder="Enter brand name">
+                                                    </div>
+
+                                                    <!-- Category -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="category" class="form-label">Category <span class="required">*</span></label>
+                                                        <select class="form-select" th:field="*{category}" id="category" required>
+                                                            <option value="">Select Category</option>
+                                                            <option th:each="category : ${categories}" 
+                                                                    th:value="${category.id}" 
+                                                                    th:text="${category.name}">Category</option>
+                                                        </select>
+                                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+                                                    </div>
+
+                                                    <!-- Price -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="price" class="form-label">Price (₹) <span class="required">*</span></label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">₹</span>
+                                                            <input type="number" class="form-control" 
+                                                                   th:field="*{price}" 
+                                                                   id="price" 
+                                                                   placeholder="0.00"
+                                                                   step="0.01"
+                                                                   min="0"
+                                                                   required>
+                                                        </div>
+                                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                                                    </div>
+
+                                                    <!-- Size -->
+                                                    <div class="col-md-4 mb-3">
+                                                        <label for="size" class="form-label">Size</label>
+                                                        <select class="form-select" th:field="*{size}" id="size">
+                                                            <option value="">Select Size</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!-- Color -->
+                                                    <div class="col-md-4 mb-3">
+                                                        <label for="color" class="form-label">Color</label>
+                                                        <input type="text" class="form-control" 
+                                                               th:field="*{color}" 
+                                                               id="color" 
+                                                               placeholder="Enter color">
+                                                    </div>
+
+                                                    <!-- Stock Quantity -->
+                                                    <div class="col-md-4 mb-3">
+                                                        <label for="stockQuantity" class="form-label">Stock Quantity <span class="required">*</span></label>
+                                                        <input type="number" class="form-control" 
+                                                               th:field="*{stockQuantity}" 
+                                                               id="stockQuantity" 
+                                                               placeholder="0"
+                                                               min="0"
+                                                               required>
+                                                        <div class="invalid-feedback" th:if="${#fields.hasErrors('stockQuantity')}" th:errors="*{stockQuantity}"></div>
+                                                    </div>
+
+                                                    <!-- Description -->
+                                                    <div class="col-12 mb-4">
+                                                        <label for="description" class="form-label">Description</label>
+                                                        <textarea class="form-control" 
+                                                                  th:field="*{description}" 
+                                                                  id="description" 
+                                                                  rows="4" 
+                                                                  placeholder="Enter product description..."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Form Actions -->
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <hr class="my-4">
+                                                <div class="d-flex justify-content-end gap-2">
+                                                    <a href="/admin/products" class="btn btn-secondary">
+                                                        <i class="fas fa-times me-2"></i>Cancel
+                                                    </a>
+                                                    <button type="reset" class="btn btn-outline-secondary">
+                                                        <i class="fas fa-undo me-2"></i>Reset
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fas fa-save me-2"></i>Save Product
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function previewImage() {
+            const imageUrl = document.getElementById('imageUrl').value;
+            const preview = document.getElementById('imagePreview');
+            
+            if (imageUrl && isValidImageUrl(imageUrl)) {
+                preview.innerHTML = `<img src="${imageUrl}" alt="Product Preview" onerror="showImageError()">`;
+            } else {
+                showDefaultPreview();
+            }
+        }
+        
+        function isValidImageUrl(url) {
+            const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+            const urlLower = url.toLowerCase();
+            return imageExtensions.some(ext => urlLower.includes(ext)) || url.includes('http');
+        }
+        
+        function showImageError() {
+            showDefaultPreview();
+        }
+        
+        function showDefaultPreview() {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `
+                <div class="text-muted">
+                    <i class="fas fa-image fa-3x mb-2"></i>
+                    <p>Image Preview</p>
+                </div>
+            `;
+        }
+        
+        // Form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+        
+        // Auto-resize description textarea
+        document.getElementById('description').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+    </script>
+</body>
+</html>
