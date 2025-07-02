@@ -4,238 +4,292 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Orders - SportyShoes Admin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .sidebar {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.8rem 1.2rem;
-            margin: 0.2rem 0;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+
+        .orders-container {
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 50px auto;
         }
-        .main-content {
-            background-color: #f8f9fa;
-            min-height: 100vh;
+
+        .orders-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
         }
-        .brand-title {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+
+        .orders-header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
-        .customer-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+
+        .orders-header p {
+            color: #666;
+            font-size: 14px;
         }
+
+        .nav-menu {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav-menu a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: #f0f0f0;
+        }
+
+        .customer-info {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .customer-info h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .customer-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .order-section h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .order-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 1.5rem;
-            transition: transform 0.2s ease;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 20px;
         }
-        .order-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
+
         .order-header {
-            background-color: #f8f9fa;
-            border-radius: 15px 15px 0 0;
-            padding: 1.5rem;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
         }
-        .product-item {
+
+        .order-header h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .order-header p {
+            color: #666;
+            font-size: 14px;
+            margin: 2px 0;
+        }
+
+        .order-items {
+            margin-top: 15px;
+        }
+
+        .order-items h4 {
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .item {
             border-bottom: 1px solid #eee;
-            padding: 1rem 0;
+            padding: 10px 0;
         }
-        .product-item:last-child {
+
+        .item:last-child {
             border-bottom: none;
         }
-        .product-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-            background-color: #f8f9fa;
+
+        .item-row {
+            display: grid;
+            grid-template-columns: 1fr 100px 80px 100px;
+            gap: 15px;
+            align-items: center;
         }
-        .badge-large {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
+
+        .item-name {
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
         }
-        .stats-card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+
+        .item-details {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .item-qty, .item-price, .item-total {
+            color: #333;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .status-pending { background: #fff3cd; }
+        .status-confirmed { background: #d1ecf1; }
+        .status-shipped { background: #d4edda; }
+        .status-delivered { background: #d4edda; }
+        .status-cancelled { background: #f8d7da; }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            border: 1px solid #ccc;
+        }
+
+        .empty-state h3 {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .empty-state a:hover {
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 600px) {
+            .nav-menu a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .item-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            
+            .item-qty, .item-price, .item-total {
+                text-align: left;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar">
-                <div class="d-flex flex-column p-3">
-                    <h4 class="text-white mb-4">
-                        <i class="fas fa-running"></i> SportyShoes Admin
-                    </h4>
-                    <nav class="nav flex-column">
-                        <a class="nav-link" href="/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                        </a>
-                        <a class="nav-link" href="/admin/products">
-                            <i class="fas fa-box me-2"></i> Products
-                        </a>
+    <div class="orders-container">
+        <div class="orders-header">
+            <h1>Customer Orders</h1>
+            <p>SportyShoes Administration Panel</p>
+        </div>
 
-                        <a class="nav-link" href="/admin/orders">
-                            <i class="fas fa-shopping-cart me-2"></i> Orders
-                        </a>
-                        <a class="nav-link active" href="/admin/users">
-                            <i class="fas fa-users me-2"></i> Customers
-                        </a>
-                        
-                        <hr class="text-white">
-                        <a class="nav-link" href="/admin/profile">
-                            <i class="fas fa-user me-2"></i> Profile
-                        </a>
-                        <a class="nav-link" href="/logout">
-                            <i class="fas fa-sign-out-alt me-2"></i> Logout
-                        </a>
-                    </nav>
-                </div>
-            </div>
+        <div class="nav-menu">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/products">Products</a>
+            <a href="/admin/orders">Orders</a>
+            <a href="/admin/users" class="active">Customers</a>
+            <a href="/admin/profile">Profile</a>
+        </div>
 
-            <!-- Main Content -->
-            <div class="col-md-10 main-content">
-                <div class="p-4">
-                    <!-- Header with Breadcrumb -->
-                  
+        <div class="customer-info" th:if="${user}">
+            <h2 th:text="${user.firstName + ' ' + user.lastName}">John Doe</h2>
+            <p th:text="${user.email}">john@example.com</p>
+        </div>
 
-                    <!-- Customer Information Card -->
-                    <div class="card customer-card mb-4" th:if="${user}">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <div class="d-flex align-items-center">
-
-                                        <div>
-                                            <h3 class="mb-1" th:text="${user.firstName + ' ' + user.lastName}">John Doe</h3>
-                                            <p class="mb-1 opacity-90">
-                                                <i class="fas fa-envelope me-2"></i>
-                                                <span th:text="${user.email}">john@example.com</span>
-                                            </p>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div th:if="${!#lists.isEmpty(orders)}">
+            <div class="order-section">
+                <h2>Order History</h2>
+                
+                <div th:each="order : ${orders}" class="order-card">
+                    <div class="order-header">
+                        <h3>Order #<span th:text="${order.id}">001</span></h3>
+                        <p>Date: <span th:text="${#temporals.format(order.orderDate, 'MMM dd, yyyy HH:mm')}">Jan 15, 2024 14:30</span></p>
+                        <p>Total: ₹<span th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 2, 'POINT')}">1,299.00</span></p>
+                        <p>Status: 
+                            <span class="status-badge" 
+                                  th:classappend="${order.status.name() == 'PENDING'} ? 'status-pending' : 
+                                                 (${order.status.name() == 'CONFIRMED'} ? 'status-confirmed' : 
+                                                 (${order.status.name() == 'SHIPPED'} ? 'status-shipped' :
+                                                 (${order.status.name() == 'DELIVERED'} ? 'status-delivered' : 'status-cancelled')))"
+                                  th:text="${order.status.name()}">PENDING</span>
+                        </p>
                     </div>
-
-                    <div th:if="${!#lists.isEmpty(orders)}">
-                        <h4 class="mb-3">Order History</h4>
+                    
+                    <div class="order-items">
+                        <h4>Items (<span th:text="${#lists.size(order.orderItems)}">0</span>)</h4>
                         
-                        <div th:each="order : ${orders}" class="order-card">
-                            <div class="order-header">
-                                <div class="row align-items-center">
-                                    <div class="col-md-3">
-                                        <h5 class="mb-1">Order #<span th:text="${order.id}">001</span></h5>
-                                        <small class="text-muted" th:text="${#temporals.format(order.orderDate, 'MMM dd, yyyy HH:mm')}">Jan 15, 2024 14:30</small>
+                        <div th:each="item : ${order.orderItems}" class="item">
+                            <div class="item-row">
+                                <div>
+                                    <div class="item-name" th:text="${item.product.name}">Product Name</div>
+                                    <div class="item-details">
+                                        <span th:if="${item.product.brand}" th:text="${item.product.brand}">Brand</span>
+                                        <span th:if="${!#strings.isEmpty(item.product.brand) and (!#strings.isEmpty(item.product.size) or !#strings.isEmpty(item.product.color))}"> • </span>
+                                        <span th:if="${item.product.size}" th:text="${'Size: ' + item.product.size}">Size: M</span>
+                                        <span th:if="${!#strings.isEmpty(item.product.size) and !#strings.isEmpty(item.product.color)}"> • </span>
+                                        <span th:if="${item.product.color}" th:text="${'Color: ' + item.product.color}">Color: Blue</span>
                                     </div>
-                                    <div class="col-md-3">
-                                        <strong>Total: ₹<span th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 2, 'POINT')}">1,299.00</span></strong>
-                                    </div>
-
-                                    <div class="col-md-3 text-end">
-                                        <span class="badge badge-large" 
-                                              th:classappend="${order.status.name() == 'PENDING'} ? 'bg-warning text-dark' : 
-                                                             (${order.status.name() == 'CONFIRMED'} ? 'bg-info' : 
-                                                             (${order.status.name() == 'SHIPPED'} ? 'bg-primary' :
-                                                             (${order.status.name() == 'DELIVERED'} ? 'bg-success' : 'bg-danger')))"
-                                              th:text="${order.status.name()}">PENDING</span>
-                                    </div>
+                                    <div class="item-details" th:text="${item.product.category.name}">Category</div>
                                 </div>
-                            </div>
-                            
-                            <!-- Order Items -->
-                            <div class="card-body">
-                                <h6 class="mb-3 ms-3">
-                                    Order Items 
-                                    <span class="badge bg-light text-dark ms-2" th:text="${#lists.size(order.orderItems)}">0</span>
-                                </h6>
-                                
-                                <div th:each="item : ${order.orderItems}" class="ms-3 product-item">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-1">
-                                            <img th:src="${item.product.imageUrl ?: '/images/no-image.png'}" 
-                                                 th:alt="${item.product.name}"
-                                                 class="product-image">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h6 class="mb-1" th:text="${item.product.name}">Product Name</h6>
-                                            <small class="text-muted">
-										    <span th:if="${item.product.brand}" th:text="${item.product.brand}">Brand</span>
-										
-										    <span th:if="${!#strings.isEmpty(item.product.brand) and (!#strings.isEmpty(item.product.size) or !#strings.isEmpty(item.product.color))}"> • </span>
-										
-										    <span th:if="${item.product.size}" th:text="${'Size: ' + item.product.size}">Size: M</span>
-										
-										    <span th:if="${!#strings.isEmpty(item.product.size) and !#strings.isEmpty(item.product.color)}"> • </span>
-										
-										    <span th:if="${item.product.color}" th:text="${'Color: ' + item.product.color}">Color: Blue</span>
-										</small>
-                                        </div>
-                                        <div class="col-md-2 me-10">
-                                            <span class="badge bg-primary" th:text="${item.product.category.name}">Category</span>
-                                        </div>
-                                        <div class="col-md-2 me-10 text-center">
-                                            <strong>Qty: <span th:text="${item.quantity}">1</span></strong>
-                                        </div>
-                                        <div class="col-md-2 me-6 text-center">
-                                            <strong>₹<span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}">999.00</span></strong>
-                                        </div>
-                                        <div class="col-md-1 me-6 text-end">
-                                            <strong>₹<span th:text="${#numbers.formatDecimal(item.price * item.quantity, 0, 'COMMA', 2, 'POINT')}">999.00</span></strong>
-                                        </div>
-                                    </div>
+                                <div class="item-qty">
+                                    Qty: <span th:text="${item.quantity}">1</span>
                                 </div>
-                               
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Empty State -->
-                    <div th:if="${#lists.isEmpty(orders)}" class="text-center py-5">
-                        <div class="card">
-                            <div class="card-body py-5">
-                                <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
-                                <h3 class="text-muted mb-3">No Orders Found</h3>
-                                <p class="text-muted mb-4">
-                                    This customer hasn't placed any orders yet.
-                                </p>
-                                <a href="/admin/orders" class="btn btn-primary">
-                                    <i class="fas fa-plus me-2"></i>View All Orders
-                                </a>
+                                <div class="item-price">
+                                    ₹<span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}">999.00</span>
+                                </div>
+                                <div class="item-total">
+                                    ₹<span th:text="${#numbers.formatDecimal(item.price * item.quantity, 0, 'COMMA', 2, 'POINT')}">999.00</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <div th:if="${#lists.isEmpty(orders)}" class="empty-state">
+            <h3>No Orders Found</h3>
+            <p>This customer hasn't placed any orders yet.</p>
+            <a href="/admin/orders">View All Orders</a>
+        </div>
+    </div>
 </body>
 </html>

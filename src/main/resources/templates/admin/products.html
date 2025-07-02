@@ -4,233 +4,449 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management - SportyShoes</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .sidebar {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.8rem 1.2rem;
-            margin: 0.2rem 0;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-        .main-content {
-            background-color: #f8f9fa;
-            min-height: 100vh;
-        }
-        .product-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .search-filter-bar {
+
+        .product-container {
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .product-header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .nav-menu {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav-menu a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .nav-menu a:hover {
+            background: #f0f0f0;
+        }
+
+        .nav-menu a.active {
+            background: #f0f0f0;
+        }
+
+        .add-product-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .add-btn {
+            color: black;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .add-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .alert-danger {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .search-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-form input,
+        .search-form select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .search-form input {
+            min-width: 250px;
+        }
+
+        .search-form select {
+            min-width: 150px;
+        }
+
+        .filter-btn {
+            color: black;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .products-section {
+            margin-bottom: 30px;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        .products-table th,
+        .products-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        .products-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .products-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+        }
+
+        .product-image-placeholder {
+            width: 50px;
+            height: 50px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .status-in-stock {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .status-out-of-stock {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            color: black;
+            text-decoration: none;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .action-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-title {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .modal-body {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+        }
+
+        .modal-btn:hover {
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-form input,
+            .search-form select {
+                min-width: 100%;
+            }
+            
+            .products-table {
+                font-size: 12px;
+            }
+            
+            .products-table th,
+            .products-table td {
+                padding: 8px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar">
-                <div class="d-flex flex-column p-3">
-                    <h4 class="text-white mb-4">
-                        <i class="fas fa-running"></i> SportyShoes Admin
-                    </h4>
-                    <nav class="nav flex-column">
-                        <a class="nav-link" href="/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                        </a>
-                        <a class="nav-link active" href="/admin/products">
-                            <i class="fas fa-box me-2"></i> Products
-                        </a>
+    <div class="product-container">
+        <div class="product-header">
+            <h1>Product Management</h1>
+            <p>SportyShoes Administration Panel</p>
+        </div>
 
-                        <a class="nav-link" href="/admin/orders">
-                            <i class="fas fa-shopping-cart me-2"></i> Orders
-                        </a>
-                        <a class="nav-link" href="/admin/users">
-                            <i class="fas fa-users me-2"></i> Customers
-                        </a>
-                        
-                        <hr class="text-white">
-                        <a class="nav-link" href="/admin/profile">
-                            <i class="fas fa-user me-2"></i> Profile
-                        </a>
-                        <a class="nav-link" href="/logout">
-                            <i class="fas fa-sign-out-alt me-2"></i> Logout
-                        </a>
-                    </nav>
-                </div>
-            </div>
+        <div class="nav-menu">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/products" class="active">Products</a>
+            <a href="/admin/orders">Orders</a>
+            <a href="/admin/users">Customers</a>
+            <a href="/admin/profile">Profile</a>
+        </div>
 
-            <!-- Main Content -->
-            <div class="col-md-10 main-content">
-                <div class="p-4">
-                    <!-- Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2>Product Management</h2>
-                        <a href="/admin/products/add" class="btn btn-primary">
-                            <i class="fas fa-plus me-2"></i>Add New Product
-                        </a>
-                    </div>
+        <div class="add-product-section">
+            <a href="/admin/products/add" class="add-btn">Add New Product</a>
+        </div>
 
-                    <!-- Alert Messages -->
-                    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="fas fa-check-circle me-2"></i>
-                        <span th:text="${success}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="fas fa-exclamation-circle me-2"></i>
-                        <span th:text="${error}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+        <!-- Alert Messages -->
+        <div th:if="${success}" class="alert alert-success">
+            <span th:text="${success}">Success message</span>
+        </div>
+        <div th:if="${error}" class="alert alert-danger">
+            <span th:text="${error}">Error message</span>
+        </div>
 
-                    <!-- Search and Filter Bar -->
-                    <div class="search-filter-bar p-4 mb-4">
-                        <form method="get" th:action="@{/admin/products}">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-search"></i>
-                                        </span>
-                                        <input type="text" class="form-control" name="search" 
-                                               th:value="${searchTerm}" placeholder="Search products by name or brand...">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <select class="form-select" name="category">
-                                        <option value="">All Categories</option>
-                                        <option th:each="category : ${categories}" 
-                                                th:value="${category.id}" 
-                                                th:text="${category.name}"
-                                                th:selected="${category.id == selectedCategory}">Category</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-outline-primary w-100">
-                                        <i class="fas fa-filter me-2"></i>Filter
-                                    </button>
-                                </div>
+        <!-- Search and Filter Section -->
+        <div class="search-section">
+            <form method="get" th:action="@{/admin/products}" class="search-form">
+                <input type="text" name="search" th:value="${searchTerm}" placeholder="Search products by name or brand...">
+                <select name="category">
+                    <option value="">All Categories</option>
+                    <option th:each="category : ${categories}" 
+                            th:value="${category.id}" 
+                            th:text="${category.name}"
+                            th:selected="${category.id == selectedCategory}">Category</option>
+                </select>
+                <button type="submit" class="filter-btn">Filter</button>
+            </form>
+        </div>
+
+        <!-- Products Table -->
+        <div class="products-section">
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td>
+                            <img th:if="${product.imageUrl != null and product.imageUrl != ''}" 
+                                 th:src="${product.imageUrl}" 
+                                 alt="Product Image" 
+                                 class="product-image">
+                            <div th:unless="${product.imageUrl != null and product.imageUrl != ''}" 
+                                 class="product-image-placeholder">
+                                No Image
                             </div>
-                        </form>
-                    </div>
-
-                    <!-- Products Table -->
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Brand</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="product : ${products}">
-                                            <td>
-                                                <img th:if="${product.imageUrl != null and product.imageUrl != ''}" 
-                                                     th:src="${product.imageUrl}" 
-                                                     alt="Product Image" 
-                                                     class="product-image">
-                                                <div th:unless="${product.imageUrl != null and product.imageUrl != ''}" 
-                                                     class="product-image bg-light d-flex align-items-center justify-content-center">
-                                                    <i class="fas fa-image text-muted"></i>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="fw-bold" th:text="${product.name}">Product Name</div>
-                                                <small class="text-muted" th:text="${#strings.abbreviate(product.description, 50)}">Description...</small>
-                                            </td>
-                                            <td th:text="${product.brand}">Brand</td>
-                                            <td th:text="${product.category != null ? product.category.name : 'N/A'}">Category</td>
-                                            <td>₹<span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">0.00</span></td>
-                                            <td>
-                                                <span th:text="${product.stockQuantity}">0</span>
-                                            </td>
-                                            <td>
-                                                <span th:if="${product.stockQuantity > 0}" class="badge bg-success">In Stock</span>
-                                                <span th:unless="${product.stockQuantity > 0}" class="badge bg-danger">Out of Stock</span>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group" role="group">
-                                                    <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" 
-                                                       class="btn btn-sm btn-outline-primary" title="Edit">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <!-- Fixed delete button with proper data attributes -->
-                                                    <button type="button" class="btn btn-sm btn-outline-danger delete-btn" 
-                                                            title="Delete" 
-                                                            th:data-product-id="${product.id}"
-                                                            th:data-product-name="${product.name}">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr th:if="${#lists.isEmpty(products)}">
-                                            <td colspan="8" class="text-center text-muted py-5">
-                                                <i class="fas fa-box-open fa-3x mb-3"></i><br>
-                                                No products found
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </td>
+                        <td>
+                            <div class="product-name" th:text="${product.name}">Product Name</div>
+                            <div class="product-description" th:text="${#strings.abbreviate(product.description, 40)}">Description...</div>
+                        </td>
+                        <td th:text="${product.brand}">Brand</td>
+                        <td th:text="${product.category != null ? product.category.name : 'N/A'}">Category</td>
+                        <td>₹<span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">0.00</span></td>
+                        <td th:text="${product.stockQuantity}">0</td>
+                        <td>
+                            <span th:if="${product.stockQuantity > 0}" class="status-badge status-in-stock">In Stock</span>
+                            <span th:unless="${product.stockQuantity > 0}" class="status-badge status-out-of-stock">Out of Stock</span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" class="action-btn">Edit</a>
+                                <button type="button" class="action-btn delete-btn" 
+                                        th:data-product-id="${product.id}"
+                                        th:data-product-name="${product.name}">Delete</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(products)}">
+                        <td colspan="8" class="no-products">
+                            No products found
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm Delete</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Fixed modal body - removed hardcoded text -->
-                    <p>Are you sure you want to delete the product "<span id="productName"></span>"?</p>
-                    <p class="text-danger"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form id="deleteForm" method="post" style="display: inline;">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-title">Confirm Delete</div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the product "<span id="productName"></span>"?</p>
+                <p style="color: #999; font-size: 12px;">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn" onclick="closeModal()">Cancel</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    <button type="submit" class="modal-btn">Delete</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Add event listeners to all delete buttons
             const deleteButtons = document.querySelectorAll('.delete-btn');
             
             deleteButtons.forEach(button => {
@@ -241,16 +457,21 @@
                     document.getElementById('productName').textContent = productName;
                     document.getElementById('deleteForm').action = '/admin/products/delete/' + productId;
                     
-                    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                    modal.show();
+                    document.getElementById('deleteModal').classList.add('show');
                 });
             });
         });
 
-        function confirmDelete(productId, productName) {
-            document.getElementById('productName').textContent = productName;
-            document.getElementById('deleteForm').action = '/admin/products/delete/' + productId;
-            new bootstrap.Modal(document.getElementById('deleteModal')).show();
+        function closeModal() {
+            document.getElementById('deleteModal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('deleteModal');
+            if (event.target == modal) {
+                modal.classList.remove('show');
+            }
         }
     </script>
 </body>

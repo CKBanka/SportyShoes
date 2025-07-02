@@ -12,24 +12,16 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: Arial, sans-serif;
             padding: 20px;
         }
 
         .register-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
+            border: 1px solid #ccc;
+            padding: 30px;
             width: 100%;
             max-width: 500px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 50px auto;
         }
 
         .register-header {
@@ -39,14 +31,13 @@
 
         .register-header h1 {
             color: #333;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 24px;
             margin-bottom: 10px;
         }
 
         .register-header p {
             color: #666;
-            font-size: 1rem;
+            font-size: 14px;
         }
 
         .form-row {
@@ -57,161 +48,72 @@
 
         .form-group {
             margin-bottom: 20px;
-            position: relative;
             flex: 1;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             color: #333;
-            font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .form-group input:invalid {
-            border-color: #dc3545;
-        }
-
-        .form-group input:valid {
-            border-color: #28a745;
+            border-color: #666;
         }
 
         .register-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 12px;
+            color: black;
+            border: 1px solid #ccc;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-bottom: 20px;
         }
 
         .register-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .register-btn:active {
-            transform: translateY(0);
-        }
-
-        .register-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+            background: #f0f0f0;
         }
 
         .alert {
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 10px;
             margin-bottom: 20px;
-            font-size: 0.9rem;
-            animation: slideIn 0.3s ease;
+            font-size: 14px;
         }
 
         .alert-error {
-            background-color: #fee;
-            color: #d63384;
-            border: 1px solid #f8d7da;
+            color: #721c24;
+            border: 1px solid #ccc;
         }
 
         .alert-success {
-            background-color: #d1edff;
-            color: #0c63e4;
-            border: 1px solid #b8daff;
+            color: #155724;
+            border: 1px solid #ccc;
         }
 
         .login-link {
             text-align: center;
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid #e1e5e9;
+            border-top: 1px solid #ccc;
         }
 
         .login-link a {
-            color: #667eea;
+            color: black;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
         }
 
         .login-link a:hover {
-            color: #764ba2;
             text-decoration: underline;
-        }
-
-        .home-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .home-link:hover {
-            color: white;
-        }
-
-        .password-strength {
-            font-size: 0.8rem;
-            margin-top: 5px;
-            padding: 5px;
-            border-radius: 5px;
-            display: none;
-        }
-
-        .password-strength.weak {
-            background-color: #fee;
-            color: #d63384;
-            display: block;
-        }
-
-        .password-strength.medium {
-            background-color: #fff3cd;
-            color: #856404;
-            display: block;
-        }
-
-        .password-strength.strong {
-            background-color: #d1edff;
-            color: #0c63e4;
-            display: block;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         @media (max-width: 600px) {
@@ -219,21 +121,10 @@
                 flex-direction: column;
                 gap: 0;
             }
-            
-            .register-container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-            
-            .register-header h1 {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
 <body>
-    <a href="/" class="home-link">← Back to Home</a>
-    
     <div class="register-container">
         <div class="register-header">
             <h1>Register</h1>
@@ -279,7 +170,6 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" th:field="*{password}" required 
                        placeholder="Create a strong password" minlength="6">
-                <div id="passwordStrength" class="password-strength"></div>
             </div>
 
             <div class="form-group">
@@ -301,24 +191,12 @@
             const form = document.getElementById('registerForm');
             const password = document.getElementById('password');
             const confirmPassword = document.getElementById('confirmPassword');
-            const passwordStrength = document.getElementById('passwordStrength');
-            const submitBtn = document.getElementById('submitBtn');
-
-            password.addEventListener('input', function() {
-                const value = this.value;
-                const strength = checkPasswordStrength(value);
-                
-                passwordStrength.className = 'password-strength ' + strength.class;
-                passwordStrength.textContent = strength.message;
-            });
 
             confirmPassword.addEventListener('input', function() {
                 if (this.value !== password.value) {
                     this.setCustomValidity("Passwords don't match");
-                    this.style.borderColor = '#dc3545';
                 } else {
                     this.setCustomValidity('');
-                    this.style.borderColor = '#28a745';
                 }
             });
 
@@ -329,62 +207,7 @@
                     return false;
                 }
             });
-
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'scale(1.02)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'scale(1)';
-                });
-            });
-
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                setTimeout(() => {
-                    alert.style.animation = 'slideOut 0.3s ease forwards';
-                    setTimeout(() => alert.remove(), 300);
-                }, 5000);
-            });
-
-            function checkPasswordStrength(password) {
-                if (password.length < 6) {
-                    return { class: 'weak', message: 'Password is too short (minimum 6 characters)' };
-                }
-                
-                let score = 0;
-                if (password.length >= 8) score++;
-                if (/[a-z]/.test(password)) score++;
-                if (/[A-Z]/.test(password)) score++;
-                if (/[0-9]/.test(password)) score++;
-                if (/[^A-Za-z0-9]/.test(password)) score++;
-                
-                if (score < 3) {
-                    return { class: 'weak', message: 'Weak password - add uppercase, numbers, or symbols' };
-                } else if (score < 4) {
-                    return { class: 'medium', message: 'Medium strength password' };
-                } else {
-                    return { class: 'strong', message: 'Strong password!' };
-                }
-            }
         });
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideOut {
-                from {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                to {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

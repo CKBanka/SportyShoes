@@ -4,398 +4,499 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management - SportyShoes Admin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .sidebar {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.8rem 1.2rem;
-            margin: 0.2rem 0;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+
+        .container {
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 50px auto;
         }
-        .main-content {
-            background-color: #f8f9fa;
-            min-height: 100vh;
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
         }
-        .brand-title {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .nav-menu {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav-menu a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: #f0f0f0;
+        }
+
+        .alert {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #f0f8f0;
+            color: #2d5a2d;
+        }
+
+        .alert-danger {
+            background-color: #f8f0f0;
+            color: #5a2d2d;
+        }
+
+        .search-section {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .btn {
+            color: black;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #f0f0f0;
+        }
+
+        .stats {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stats h3 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .users-table {
+            border: 1px solid #ccc;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .users-table th,
+        .users-table td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .users-table th {
+            background-color: #f0f0f0;
+            color: #333;
             font-weight: bold;
         }
-        .user-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .user-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-        .search-box {
-            border-radius: 25px;
-            border: 2px solid #e9ecef;
-            transition: border-color 0.3s ease;
-        }
-        .search-box:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        .role-badge {
-            font-size: 0.75rem;
-            padding: 0.35rem 0.8rem;
-            border-radius: 15px;
-        }
+
         .user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-weight: bold;
-            font-size: 1.2rem;
+            background-color: #f0f0f0;
         }
+
+        .user-details h6 {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .user-details small {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .contact-info div {
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
         .orders-count {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            font-size: 12px;
+            background-color: #f0f0f0;
         }
-        .table-responsive {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+        .btn-group {
+            display: flex;
+            gap: 5px;
         }
-        .action-btn {
-            padding: 0.375rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            margin: 0 0.125rem;
+
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 12px;
         }
-        .filter-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .modal-section h6 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .modal-section div {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .no-users {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .logout-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        .logout-btn {
+            color: black;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .logout-btn:hover {
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 600px) {
+            .nav-menu a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .search-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .users-table {
+                font-size: 12px;
+            }
+
+            .users-table th,
+            .users-table td {
+                padding: 8px;
+            }
+
+            .modal-content {
+                margin: 5% auto;
+                width: 95%;
+            }
+
+            .modal-info {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar">
-                <div class="d-flex flex-column p-3">
-                    <h4 class="text-white mb-4">
-                        <i class="fas fa-running"></i> SportyShoes Admin
-                    </h4>
-                    <nav class="nav flex-column">
-                        <a class="nav-link" href="/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                        </a>
-                        <a class="nav-link" href="/admin/products">
-                            <i class="fas fa-box me-2"></i> Products
-                        </a>
+    <div class="container">
+        <div class="header">
+            <h1>User Management</h1>
+            <p>SportyShoes Administration Panel</p>
+        </div>
 
-                        <a class="nav-link" href="/admin/orders">
-                            <i class="fas fa-shopping-cart me-2"></i> Orders
-                        </a>
-                        <a class="nav-link active" href="/admin/users">
-                            <i class="fas fa-users me-2"></i> Customers
-                        </a>
+        <div class="nav-menu">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/products">Products</a>
+            <a href="/admin/orders">Orders</a>
+            <a href="/admin/users" class="active">Customers</a>
+            <a href="/admin/profile">Profile</a>
+        </div>
 
-                        <hr class="text-white">
-                        <a class="nav-link" href="/admin/profile">
-                            <i class="fas fa-user me-2"></i> Profile
-                        </a>
-                        <a class="nav-link" href="/logout">
-                            <i class="fas fa-sign-out-alt me-2"></i> Logout
-                        </a>
-                    </nav>
-                </div>
-            </div>
+        <!-- Alert Messages -->
+        <div th:if="${success}" class="alert alert-success">
+            <span th:text="${success}"></span>
+        </div>
+        <div th:if="${error}" class="alert alert-danger">
+            <span th:text="${error}"></span>
+        </div>
 
-            <!-- Main Content -->
-            <div class="col-md-10 main-content">
-                <div class="p-4">
-                    <!-- Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="brand-title">
-                            <i class="fas fa-users me-2"></i>User Management
-                        </h2>
-                    </div>
+        <!-- Search Section -->
+        <div class="search-section">
+            <form method="get" action="/admin/users" class="search-form">
+                <input type="text" class="search-input" 
+                       placeholder="Search by name, email, or username..." 
+                       name="search" th:value="${searchTerm}">
+                <button type="submit" class="btn">Search Users</button>
+            </form>
+        </div>
 
-                    <!-- Alert Messages -->
-                    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="fas fa-check-circle me-2"></i><span th:text="${success}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="fas fa-exclamation-triangle me-2"></i><span th:text="${error}"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+        <!-- User Statistics -->
+        <div class="stats">
+            <h3 th:text="${#lists.size(users)}">0</h3>
+            <p>Total Users</p>
+        </div>
 
-                    <!-- Search and Filter Section -->
-                    <div class="card filter-card mb-4">
-                        <div class="card-body">
-                            <form method="get" action="/admin/users" class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="position-relative">
-                                        <input type="text" class="form-control search-box bg-white" 
-                                               placeholder="Search by name, email, or username..." 
-                                               name="search" th:value="${searchTerm}">
-                                        <i class="fas fa-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="submit" class="btn btn-light w-100">
-                                        <i class="fas fa-filter me-2"></i>Filter Users
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- User Statistics -->
-                    <div class="row mb-4">
-                        <div class="col-md-4">
-                            <div class="card user-card bg-primary text-white">
-                                <div class="card-body text-center">
-                                    <i class="fas fa-users fa-2x mb-2"></i>
-                                    <h4 th:text="${#lists.size(users)}">0</h4>
-                                    <p class="mb-0">Total Users</p>
-                                </div>
+        <!-- Users Table -->
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Contact Info</th>
+                    <th>Orders</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar" 
+                                 th:text="${user.firstName != null ? #strings.substring(user.firstName, 0, 1) : #strings.substring(user.username, 0, 1)}">
+                            </div>
+                            <div class="user-details">
+                                <h6 th:text="${user.firstName != null and user.lastName != null ? user.firstName + ' ' + user.lastName : user.username}">
+                                    John Doe
+                                </h6>
+                                <small th:text="'@' + ${user.username}">@johndoe</small>
                             </div>
                         </div>
-                        
-                    </div>
+                    </td>
+                    <td>
+                        <div class="contact-info">
+                            <div th:text="${user.email}">john@example.com</div>
+                            <div th:if="${user.phoneNumber}" th:text="${user.phoneNumber}">+91-9876543210</div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="orders-count" th:text="${#lists.size(user.orders)} + ' orders'">0 orders</span>
+                    </td>
+                    <td>
+                        <small th:text="${#temporals.format(user.createdAt, 'MMM dd, yyyy')}">
+                            Jan 15, 2024
+                        </small>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a th:href="@{/admin/users/{id}/orders(id=${user.id})}" 
+                               class="btn btn-sm">View Orders</a>
+                            <button type="button" 
+                                    class="btn btn-sm"
+                                    th:onclick="'openModal(\'userModal' + ${user.id} + '\')'">
+                                Details
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(users)}">
+                    <td colspan="5" class="no-users">
+                        <div>
+                            <h3>No users found</h3>
+                            <p>Try adjusting your search terms.</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <!-- Users Table -->
-                    <div class="card user-card">
-                        <div class="card-header bg-white border-0">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">
-                                    Users List
-                                </h5>
+        <!-- User Detail Modals -->
+        <div th:each="user : ${users}">
+            <div class="modal" th:id="'userModal' + ${user.id}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>User Details</h5>
+                        <span class="close" th:onclick="'closeModal(\'userModal' + ${user.id} + '\')'">×</span>
+                    </div>
+                    <div class="modal-info">
+                        <div class="modal-section">
+                            <h6>Personal Information</h6>
+                            <div>
+                                <strong>Full Name:</strong>
+                                <span th:text="${user.firstName != null and user.lastName != null ? user.firstName + ' ' + user.lastName : 'Not provided'}"></span>
+                            </div>
+                            <div>
+                                <strong>Username:</strong> 
+                                <span th:text="${user.username}"></span>
+                            </div>
+                            <div>
+                                <strong>Email:</strong> 
+                                <span th:text="${user.email}"></span>
+                            </div>
+                            <div>
+                                <strong>Phone:</strong> 
+                                <span th:text="${user.phoneNumber ?: 'Not provided'}"></span>
+                            </div>
+                            <div>
+                                <strong>Role:</strong>
+                                <span th:text="${user.role.name()}"></span>
                             </div>
                         </div>
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th scope="col">User</th>
-                                            <th scope="col">Contact Info</th>
-                                            <th scope="col">Orders</th>
-                                            <th scope="col">Joined</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="user : ${users}">
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="user-avatar me-3" 
-                                                         th:text="${user.firstName != null ? #strings.substring(user.firstName, 0, 1) : #strings.substring(user.username, 0, 1)}">
-                                                    </div>
-                                                    <div>
-                                                        <h6 class="mb-0" th:text="${user.firstName != null and user.lastName != null ? user.firstName + ' ' + user.lastName : user.username}">
-                                                            John Doe
-                                                        </h6>
-                                                        <small class="text-muted" th:text="'@' + ${user.username}">@johndoe</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <div class="mb-1">
-                                                        <i class="fas fa-envelope me-1 text-primary"></i>
-                                                        <small th:text="${user.email}">john@example.com</small>
-                                                    </div>
-                                                    <div th:if="${user.phoneNumber}">
-                                                        <i class="fas fa-phone me-1 text-success"></i>
-                                                        <small th:text="${user.phoneNumber}">+91-9876543210</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <span class="orders-count" th:text="${#lists.size(user.orders)} + ' orders'">0 orders</span>
-                                            </td>
-                                            <td>
-                                                <small class="text-muted" th:text="${#temporals.format(user.createdAt, 'MMM dd, yyyy')}">
-                                                    Jan 15, 2024
-                                                </small>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group" role="group">
-                                                    <a th:href="@{/admin/users/{id}/orders(id=${user.id})}" 
-                                                       class="btn btn-sm btn-outline-primary action-btn"
-                                                       title="View Orders">
-                                                        <i class="fas fa-shopping-cart"></i>
-                                                    </a>
-                                                    <button type="button" 
-                                                            class="btn btn-sm btn-outline-info action-btn"
-                                                            title="View Details"
-                                                            data-bs-toggle="modal" 
-                                                            th:data-bs-target="'#userModal' + ${user.id}">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr th:if="${#lists.isEmpty(users)}">
-                                            <td colspan="6" class="text-center text-muted py-5">
-                                                <i class="fas fa-users fa-3x mb-3 opacity-50"></i><br>
-                                                <h5>No users found</h5>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="modal-section">
+                            <h6>Account Information</h6>
+                            <div>
+                                <strong>User ID:</strong> 
+                                <span th:text="${user.id}"></span>
+                            </div>
+                            <div>
+                                <strong>Member Since:</strong> 
+                                <span th:text="${#temporals.format(user.createdAt, 'MMMM dd, yyyy')}"></span>
+                            </div>
+                            <div>
+                                <strong>Total Orders:</strong> 
+                                <span th:text="${#lists.size(user.orders)}"></span>
+                            </div>
+                            <div th:if="${user.address}">
+                                <strong>Address:</strong><br>
+                                <span th:text="${user.address}"></span>
                             </div>
                         </div>
                     </div>
-
-                    <div th:each="user : ${users}">
-                        <div class="modal fade" th:id="'userModal' + ${user.id}" tabindex="-1">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-primary text-white">
-                                        <h5 class="modal-title">
-                                            <i class="fas fa-user me-2"></i>User Details
-                                        </h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 class="text-muted mb-3">Personal Information</h6>
-                                                <div class="mb-2">
-                                                    <strong>Full Name:</strong>
-                                                    <span th:text="${user.firstName != null and user.lastName != null ? user.firstName + ' ' + user.lastName : 'Not provided'}"></span>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <strong>Username:</strong> 
-                                                    <span th:text="${user.username}"></span>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <strong>Email:</strong> 
-                                                    <span th:text="${user.email}"></span>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <strong>Phone:</strong> 
-                                                    <span th:text="${user.phoneNumber ?: 'Not provided'}"></span>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <strong>Role:</strong>
-                                                    <span class="badge bg-primary" th:text="${user.role.name()}"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6 class="text-muted mb-3">Account Information</h6>
-                                                <div class="mb-2">
-                                                    <strong>User ID:</strong> 
-                                                    <span th:text="${user.id}"></span>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <strong>Member Since:</strong> 
-                                                    <span th:text="${#temporals.format(user.createdAt, 'MMMM dd, yyyy')}"></span>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <strong>Total Orders:</strong> 
-                                                    <span th:text="${#lists.size(user.orders)}"></span>
-                                                </div>
-                                                <div class="mb-2" th:if="${user.address}">
-                                                    <strong>Address:</strong><br>
-                                                    <span th:text="${user.address}"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <a th:href="@{/admin/users/{id}/orders(id=${user.id})}" class="btn btn-primary">
-                                            <i class="fas fa-shopping-cart me-2"></i>View Orders
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" th:onclick="'closeModal(\'userModal' + ${user.id} + '\')'">Close</button>
+                        <a th:href="@{/admin/users/{id}/orders(id=${user.id})}" class="btn">View Orders</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Confirmation Modal -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Confirm Action</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="confirmationMessage"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirmButton">Confirm</button>
-                </div>
-            </div>
+        <div class="logout-section">
+            <a href="/logout" class="logout-btn">Logout</a>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Confirmation dialog
-        function confirmAction(action, userId, username) {
-            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-            const message = document.getElementById('confirmationMessage');
-            const confirmBtn = document.getElementById('confirmButton');
-            
-            if (action === 'suspend') {
-                message.textContent = `Are you sure you want to suspend user "${username}"? This action can be reversed later.`;
-                confirmBtn.onclick = function() {
-                    // Add your suspend user logic here
-                    window.location.href = `/admin/users/${userId}/suspend`;
-                };
-            }
-            
-            modal.show();
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
         }
 
-        // Auto-hide alerts after 5 seconds
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
         setTimeout(function() {
             const alerts = document.querySelectorAll('.alert');
             alerts.forEach(function(alert) {
-                const bsAlert = new bootstrap.Alert(alert);
-                bsAlert.close();
+                alert.style.display = 'none';
             });
         }, 5000);
-
-        // Search form auto-submit on enter
-        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                this.form.submit();
-            }
-        });
     </script>
 </body>
 </html>

@@ -4,141 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - SportyShoes</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .sidebar {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.8rem 1.2rem;
-            margin: 0.2rem 0;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+
+        .dashboard-container {
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+            margin: 50px auto;
         }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .dashboard-header h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .nav-menu {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nav-menu a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: #f0f0f0;
+        }
+
+        .stats-section {
+            margin-bottom: 30px;
+        }
+
+        .stats-section h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
         .stat-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
         }
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+        .stat-card h3 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
-        .main-content {
-            background-color: #f8f9fa;
-            min-height: 100vh;
+
+        .stat-card p {
+            color: #666;
+            font-size: 14px;
         }
-        .brand-title {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+
+        .logout-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        .logout-btn {
+            color: black;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        .logout-btn:hover {
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 600px) {
+            .nav-menu a {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar">
-                <div class="d-flex flex-column p-3">
-                    <h4 class="text-white mb-4">
-                        <i class="fas fa-running"></i> SportyShoes Admin
-                    </h4>
-                    <nav class="nav flex-column">
-                        <a class="nav-link active" href="/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-                        </a>
-                        <a class="nav-link" href="/admin/products">
-                            <i class="fas fa-box me-2"></i> Products
-                        </a>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+            <p>SportyShoes Administration Panel</p>
+        </div>
 
-                        <a class="nav-link" href="/admin/orders">
-                            <i class="fas fa-shopping-cart me-2"></i> Orders
-                        </a>
-                        <a class="nav-link" href="/admin/users">
-                            <i class="fas fa-users me-2"></i> Customers
-                        </a>
-                        
-                        <hr class="text-white">
-                        <a class="nav-link" href="/admin/profile">
-                            <i class="fas fa-user me-2"></i> Profile
-                        </a>
-                        <a class="nav-link" href="/logout">
-                            <i class="fas fa-sign-out-alt me-2"></i> Logout
-                        </a>
-                    </nav>
+        <div class="nav-menu">
+            <a href="/admin/dashboard" class="active">Dashboard</a>
+            <a href="/admin/products">Products</a>
+            <a href="/admin/orders">Orders</a>
+            <a href="/admin/users">Customers</a>
+            <a href="/admin/profile">Profile</a>
+        </div>
+
+        <div class="stats-section">
+            <h2>Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 th:text="${totalProducts}">0</h3>
+                    <p>Total Products</p>
                 </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="col-md-10 main-content">
-                <div class="p-4">
-                    <!-- Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="brand-title">Admin Dashboard</h2>
-                    </div>
-
-                    <!-- Statistics Cards -->
-                    <div class="row mb-4">
-                        <div class="col-md-3 mb-3">
-                            <div class="card stat-card bg-primary text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h3 class="card-title mb-0" th:text="${totalProducts}">0</h3>
-                                            <p class="card-text">Total Products</p>
-                                        </div>
-                                        <i class="fas fa-box fa-2x opacity-75"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <div class="card stat-card bg-success text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h3 class="card-title mb-0" th:text="${totalCustomers}">0</h3>
-                                            <p class="card-text">Total Customers</p>
-                                        </div>
-                                        <i class="fas fa-users fa-2x opacity-75"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <div class="card stat-card bg-warning text-white">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h3 class="card-title mb-0" th:text="${totalOrders}">0</h3>
-                                            <p class="card-text">Total Orders</p>
-                                        </div>
-                                        <i class="fas fa-shopping-cart fa-2x opacity-75"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <!-- Recent Orders -->
-                    
+                <div class="stat-card">
+                    <h3 th:text="${totalCustomers}">0</h3>
+                    <p>Total Customers</p>
+                </div>
+                <div class="stat-card">
+                    <h3 th:text="${totalOrders}">0</h3>
+                    <p>Total Orders</p>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <div class="logout-section">
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+    </div>
 </body>
 </html>

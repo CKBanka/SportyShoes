@@ -12,24 +12,16 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: Arial, sans-serif;
             padding: 20px;
         }
 
         .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
+            border: 1px solid #ccc;
+            padding: 30px;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 50px auto;
         }
 
         .login-header {
@@ -39,148 +31,86 @@
 
         .login-header h1 {
             color: #333;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 24px;
             margin-bottom: 10px;
         }
 
         .login-header p {
             color: #666;
-            font-size: 1rem;
+            font-size: 14px;
         }
 
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             color: #333;
-            font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-2px);
+            border-color: #666;
         }
 
         .login-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 12px;
+            color: black;
+            border: 1px solid #ccc;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-bottom: 20px;
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
+            background: #f0f0f0;
         }
 
         .alert {
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 10px;
             margin-bottom: 20px;
-            font-size: 0.9rem;
-            animation: slideIn 0.3s ease;
+            font-size: 14px;
         }
 
         .alert-error {
-            background-color: #fee;
-            color: #d63384;
-            border: 1px solid #f8d7da;
+            color: #721c24;
+            border: 1px solid #ccc;
         }
 
         .alert-success {
-            background-color: #d1edff;
-            color: #0c63e4;
-            border: 1px solid #b8daff;
+            color: #155724;
+            border: 1px solid #ccc;
         }
 
         .register-link {
             text-align: center;
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid #e1e5e9;
+            border-top: 1px solid #ccc;
         }
 
         .register-link a {
-            color: #667eea;
+            color: black;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
         }
 
         .register-link a:hover {
-            color: #764ba2;
             text-decoration: underline;
-        }
-
-        .home-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .home-link:hover {
-            color: white;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 20px;
-                margin: 10px;
-            }
-            
-            .login-header h1 {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
 <body>
-    <a href="/" class="home-link">← Back to Home</a>
-    
     <div class="login-container">
         <div class="login-header">
             <h1>Login</h1>
@@ -215,44 +145,5 @@
             <p>Don't have an account? <a href="/register">Create one here</a></p>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('input');
-            
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'scale(1.02)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'scale(1)';
-                });
-            });
-
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                setTimeout(() => {
-                    alert.style.animation = 'slideOut 0.3s ease forwards';
-                    setTimeout(() => alert.remove(), 300);
-                }, 5000);
-            });
-        });
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideOut {
-                from {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                to {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>

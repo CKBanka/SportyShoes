@@ -12,122 +12,32 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb a {
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .breadcrumb a:hover {
-            color: #764ba2;
-        }
-
-        .back-btn {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
 
         .payment-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 30px;
-            min-height: calc(100vh - 120px);
-        }
-
-        .payment-form {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            border: 1px solid #ccc;
             padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            height: fit-content;
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
         }
 
-        .payment-form h2 {
-            color: #333;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e1e5e9;
-        }
-
-        .form-section {
+        .payment-header {
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .form-section h3 {
+        .payment-header h1 {
             color: #333;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
-        .section-icon {
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
+        .payment-header p {
+            color: #666;
+            font-size: 14px;
         }
 
         .form-group {
@@ -136,29 +46,25 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 5px;
             color: #333;
+            font-size: 14px;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #666;
         }
 
         .form-group textarea {
@@ -167,527 +73,185 @@
         }
 
         .payment-methods {
-            display: grid;
-            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .payment-option {
-            position: relative;
+            margin-bottom: 10px;
         }
 
         .payment-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
+            margin-right: 8px;
         }
 
         .payment-option label {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-            border: 2px solid #e1e5e9;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .payment-option input[type="radio"]:checked + label {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-
-        .payment-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .payment-info {
-            flex: 1;
-        }
-
-        .payment-name {
-            font-weight: 600;
             color: #333;
-            margin-bottom: 4px;
-        }
-
-        .payment-desc {
-            font-size: 0.85rem;
-            color: #666;
+            font-size: 14px;
+            cursor: pointer;
         }
 
         .order-summary {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            height: fit-content;
-            position: sticky;
-            top: 30px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
         }
 
         .order-summary h3 {
             color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 25px;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .product-info {
+            margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #e1e5e9;
-        }
-
-        .product-preview {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-        }
-
-        .product-image {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #ccc;
-            flex-shrink: 0;
-        }
-
-        .product-details {
-            flex: 1;
+            border-bottom: 1px solid #ccc;
         }
 
         .product-name {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 5px;
-            font-size: 1.1rem;
         }
 
         .product-price {
-            color: #667eea;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .product-quantity {
             color: #666;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        .order-breakdown {
-            margin-bottom: 25px;
+            font-size: 14px;
         }
 
         .breakdown-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
 
         .breakdown-row.total {
-            font-weight: 700;
-            font-size: 1.2rem;
-            padding-top: 15px;
-            border-top: 2px solid #e1e5e9;
-            color: #333;
+            font-weight: bold;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+            font-size: 16px;
         }
 
-        .breakdown-label {
-            color: #666;
-        }
-
-        .breakdown-value {
-            color: #333;
-            font-weight: 500;
-        }
-
-        .breakdown-row.total .breakdown-value {
-            color: #667eea;
-        }
-
-        .submit-btn {
+        .payment-btn {
             width: 100%;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 12px;
+            color: black;
+            border: 1px solid #ccc;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-bottom: 20px;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        .payment-btn:hover {
+            background: #f0f0f0;
         }
 
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
         }
 
-        .submit-btn.loading {
-            background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
-            cursor: wait;
-        }
-
-        .security-info {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(40, 167, 69, 0.05);
-            border: 1px solid rgba(40, 167, 69, 0.1);
-            border-radius: 10px;
-            font-size: 0.85rem;
-            color: #155724;
-            text-align: center;
-        }
-
-        .flash-messages {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .flash-message {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.3s ease;
-        }
-
-        .flash-error {
-            background: #f8d7da;
+        .alert-error {
             color: #721c24;
-            border: 1px solid #f5c6cb;
+            border: 1px solid #ccc;
         }
 
-        .flash-success {
-            background: #d4edda;
+        .alert-success {
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border: 1px solid #ccc;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
         }
 
-        @media (max-width: 768px) {
-            .payment-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px 15px;
-            }
-            
-            .order-summary {
-                position: static;
-                order: -1;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .payment-form, .order-summary {
-                padding: 20px;
-            }
+        .back-link a {
+            color: black;
+            text-decoration: none;
         }
 
-        @media (max-width: 480px) {
-            .payment-container {
-                padding: 15px 10px;
-            }
-            
-            .product-preview {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .product-image {
-                align-self: center;
-            }
+        .back-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="flash-messages">
-        <div th:if="${error}" class="flash-message flash-error" th:text="${error}"></div>
-        <div th:if="${success}" class="flash-message flash-success" th:text="${success}"></div>
-    </div>
-
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">Sporty Shoes</div>
-
-            <a href="/customer/dashboard" class="back-btn">← Back to Dashboard</a>
-        </div>
-    </header>
-
     <div class="payment-container">
-        <div class="payment-form">
-            <h2>Complete Your Purchase</h2>
-            
-            <form th:action="@{/customer/process-payment}" method="post" id="paymentForm">
-                <input type="hidden" name="productId" th:value="${product?.id}">
-                <input type="hidden" name="quantity" th:value="${quantity}">
-                
-                <!-- Payment Method Section -->
-                <div class="form-section">
-                    <h3>
-                        <span class="section-icon">💳</span>
-                        Payment Method
-                    </h3>
-                    <div class="payment-methods">
-                        <div class="payment-option">
-                            <input type="radio" id="card" name="paymentMethod" value="CARD" checked>
-                            <label for="card">
-                                <div class="payment-icon">💳</div>
-                                <div class="payment-info">
-                                    <div class="payment-name">Credit/Debit Card</div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="payment-option">
-                            <input type="radio" id="upi" name="paymentMethod" value="UPI">
-                            <label for="upi">
-                                <div class="payment-icon">📱</div>
-                                <div class="payment-info">
-                                    <div class="payment-name">UPI Payment</div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="payment-option">
-                            <input type="radio" id="netbanking" name="paymentMethod" value="NET_BANKING">
-                            <label for="netbanking">
-                                <div class="payment-icon">🏦</div>
-                                <div class="payment-info">
-                                    <div class="payment-name">Net Banking</div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+        <div class="payment-header">
+            <h1>Complete Payment</h1>
+            <p>Review your order and complete the purchase</p>
+        </div>
 
-                <div class="form-section">
+        <div th:if="${error}" class="alert alert-error">
+            <span th:text="${error}">Error message</span>
+        </div>
 
-                    <div class="form-group">
-                        <label for="address">Delivery Address *</label>
-                        <textarea id="address" name="address" required 
-                                  placeholder="Enter your complete delivery address"
-                                  th:text="${customer?.address}"></textarea>
-                    </div>
-
-                </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    Complete Purchase
-                </button>
-            </form>
+        <div th:if="${success}" class="alert alert-success">
+            <span th:text="${success}">Success message</span>
         </div>
 
         <div class="order-summary">
             <h3>Order Summary</h3>
+            <div class="product-info" th:if="${product != null}">
+                <div class="product-name" th:text="${product.name}">Product Name</div>
+                <div class="product-price">Price: ₹<span th:text="${product.price}">2,499</span></div>
+                <div class="product-price">Quantity: <span th:text="${quantity}">1</span></div>
+            </div>
+            <div class="breakdown-row">
+                <span>Subtotal:</span>
+                <span>₹<span th:text="${totalAmount}">2,499</span></span>
+            </div>
+            <div class="breakdown-row">
+                <span>Shipping:</span>
+                <span>FREE</span>
+            </div>
+            <div class="breakdown-row total">
+                <span>Total:</span>
+                <span>₹<span th:text="${totalAmount}">2,499</span></span>
+            </div>
+        </div>
+
+        <form th:action="@{/customer/process-payment}" method="post">
+            <input type="hidden" name="productId" th:value="${product?.id}">
+            <input type="hidden" name="quantity" th:value="${quantity}">
             
-            <div class="product-preview" th:if="${product != null}">
-                <div class="product-image">
-                    <img th:if="${product.imageUrl != null and not #strings.isEmpty(product.imageUrl)}" 
-                         th:src="${product.imageUrl}" 
-                         th:alt="${product.name}"
-                         style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                    <span th:if="${product.imageUrl == null or #strings.isEmpty(product.imageUrl)}">📦</span>
-                </div>
-                <div class="product-details">
-                    <div class="product-name" th:text="${product.name}">Product Name</div>
-                    <div class="product-price">₹<span th:text="${product.price}">2,499</span></div>
-                    <div class="product-quantity">Quantity: <span th:text="${quantity}">1</span></div>
-                </div>
-            </div>
-
-            <div class="order-breakdown">
-                <div class="breakdown-row">
-                    <span class="breakdown-label">Subtotal:</span>
-                    <span class="breakdown-value">₹<span th:text="${totalAmount}">2,499</span></span>
-                </div>
-                <div class="breakdown-row">
-                    <span class="breakdown-label">Shipping:</span>
-                    <span class="breakdown-value">FREE</span>
-                </div>
-                <div class="breakdown-row">
-                    <span class="breakdown-label">Tax:</span>
-                    <span class="breakdown-value">Included</span>
-                </div>
-                <div class="breakdown-row total">
-                    <span class="breakdown-label">Total:</span>
-                    <span class="breakdown-value">₹<span th:text="${totalAmount}">2,499</span></span>
+            <div class="form-group">
+                <label>Payment Method</label>
+                <div class="payment-methods">
+                    <div class="payment-option">
+                        <input type="radio" id="card" name="paymentMethod" value="CARD" checked>
+                        <label for="card">Credit/Debit Card</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="upi" name="paymentMethod" value="UPI">
+                        <label for="upi">UPI Payment</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="netbanking" name="paymentMethod" value="NET_BANKING">
+                        <label for="netbanking">Net Banking</label>
+                    </div>
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="address">Delivery Address</label>
+                <textarea id="address" name="address" required 
+                          placeholder="Enter your complete delivery address"
+                          th:text="${customer?.address}"></textarea>
+            </div>
+
+            <button type="submit" class="payment-btn">Complete Purchase</button>
+        </form>
+
+        <div class="back-link">
+            <p><a href="/customer/dashboard">← Back to Dashboard</a></p>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('paymentForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const addressField = document.getElementById('address');
-
-            setTimeout(() => {
-                const flashMessages = document.querySelectorAll('.flash-message');
-                flashMessages.forEach(msg => {
-                    msg.style.animation = 'slideOut 0.3s ease forwards';
-                    setTimeout(() => msg.remove(), 300);
-                });
-            }, 5000);
-
-            form.addEventListener('submit', function(e) {
-                if (!validateForm()) {
-                    e.preventDefault();
-                    return false;
-                }
-
-                submitBtn.textContent = 'Processing Payment...';
-                submitBtn.classList.add('loading');
-                submitBtn.disabled = true;
-
-                return true;
-            });
-
-            addressField.addEventListener('blur', validateAddress);
-
-            function validateForm() {
-                let isValid = true;
-
-                if (!validateAddress()) {
-                    isValid = false;
-                }
-
-
-                return isValid;
-            }
-
-            function validateAddress() {
-                const address = addressField.value.trim();
-                const errorElement = getOrCreateErrorElement(addressField);
-
-                if (address.length < 10) {
-                    showError(errorElement, 'Please enter at least 10 characters.');
-                    return false;
-                } else {
-                    hideError(errorElement);
-                    return true;
-                }
-            }
-
-
-            function getOrCreateErrorElement(inputElement) {
-                let errorElement = inputElement.parentElement.querySelector('.field-error');
-                if (!errorElement) {
-                    errorElement = document.createElement('div');
-                    errorElement.className = 'field-error';
-                    errorElement.style.cssText = 'color: #dc3545; font-size: 0.85rem; margin-top: 5px;';
-                    inputElement.parentElement.appendChild(errorElement);
-                }
-                return errorElement;
-            }
-
-            function showError(errorElement, message) {
-                errorElement.textContent = message;
-                errorElement.style.display = 'block';
-                errorElement.parentElement.querySelector('input, textarea').style.borderColor = '#dc3545';
-            }
-
-            function hideError(errorElement) {
-                errorElement.style.display = 'none';
-                errorElement.parentElement.querySelector('input, textarea').style.borderColor = '#e1e5e9';
-            }
-
-            const paymentOptions = document.querySelectorAll('.payment-option input[type="radio"]');
-            paymentOptions.forEach(option => {
-                option.addEventListener('change', function() {
-                    document.querySelectorAll('.payment-option label').forEach(label => {
-                        label.style.transform = 'scale(1)';
-                    });
-                    
-                    if (this.checked) {
-                        const label = this.nextElementSibling;
-                        label.style.transform = 'scale(1.02)';
-                        setTimeout(() => {
-                            label.style.transform = 'scale(1)';
-                        }, 200);
-                    }
-                });
-            });
-
-            const sections = document.querySelectorAll('.form-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, index * 100);
-                    }
-                });
-            });
-
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'all 0.6s ease';
-                observer.observe(section);
-            });
-        });
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>

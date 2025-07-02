@@ -12,179 +12,74 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #fff;
             color: #333;
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-text {
-            font-size: 1.1rem;
-            color: #666;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
         }
 
         .logout-btn {
             padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            color: black;
+            border: 1px solid #ccc;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            cursor: pointer;
+            background: #fff;
         }
 
         .logout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            background: #f0f0f0;
         }
 
         /* Alert messages */
         .alert {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 15px 20px;
-            border-radius: 8px;
-            font-weight: 500;
+            margin: 0 auto 20px auto;
+            padding: 10px;
+            font-size: 14px;
         }
 
         .alert-success {
-            background-color: #d4edda;
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border: 1px solid #ccc;
         }
 
         .alert-error {
-            background-color: #f8d7da;
             color: #721c24;
-            border: 1px solid #f5c6cb;
+            border: 1px solid #ccc;
         }
 
         .dashboard-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 30px 20px;
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 30px;
-            min-height: calc(100vh - 120px);
-        }
-
-        .sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            height: fit-content;
-            position: sticky;
-            top: 30px;
-        }
-
-        .sidebar h2 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e1e5e9;
-        }
-
-        .order-item {
-            background: rgba(102, 126, 234, 0.05);
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .order-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
-            border-color: rgba(102, 126, 234, 0.2);
-        }
-
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .order-id {
-            font-weight: 600;
-            color: #667eea;
-            font-size: 0.9rem;
-        }
-
-        .order-status {
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        .status-pending { background: #fff3cd; color: #856404; }
-        .status-confirmed { background: #d1ecf1; color: #0c5460; }
-        .status-shipped { background: #d4edda; color: #155724; }
-        .status-delivered { background: #d1edff; color: #0c63e4; }
-        .status-cancelled { background: #f8d7da; color: #721c24; }
-
-        .order-details {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .order-amount {
-            font-weight: 600;
-            color: #333;
-            margin-top: 5px;
-        }
-
-        .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .main-content h2 {
             color: #333;
-            font-size: 1.8rem;
+            font-size: 24px;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e1e5e9;
+            text-align: center;
         }
 
         .products-grid {
@@ -194,23 +89,15 @@
         }
 
         .product-card {
-            background: white;
-            border-radius: 15px;
+            border: 1px solid #ccc;
+            background: #fff;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
 
         .product-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            background: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -231,8 +118,8 @@
         }
 
         .product-name {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: bold;
             color: #333;
             margin-bottom: 8px;
             line-height: 1.3;
@@ -240,7 +127,7 @@
 
         .product-description {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 14px;
             line-height: 1.4;
             margin-bottom: 15px;
             display: -webkit-box;
@@ -261,20 +148,19 @@
         }
 
         .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
             margin-bottom: 5px;
         }
 
         .product-stock {
-            font-size: 0.85rem;
-            color: #28a745;
-            font-weight: 500;
+            font-size: 14px;
+            color: #666;
         }
 
         .product-stock.out-of-stock {
-            color: #dc3545;
+            color: #721c24;
         }
 
         .product-actions {
@@ -284,30 +170,23 @@
             gap: 10px;
         }
 
-		.quantity-selector {
+        .quantity-selector {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
         }
 
-        .quantity-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #333;
-        }
-
         .quantity-controls {
             display: flex;
             align-items: center;
             gap: 0;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
+            border: 1px solid #ccc;
             overflow: hidden;
         }
 
         .quantity-btn {
-            background: #f8f9fa;
+            background: #fff;
             border: none;
             width: 35px;
             height: 35px;
@@ -315,20 +194,24 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #667eea;
-            transition: all 0.2s ease;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            border-right: 1px solid #ccc;
+        }
+
+        .quantity-btn:last-child {
+            border-right: none;
+            border-left: 1px solid #ccc;
         }
 
         .quantity-btn:hover:not(:disabled) {
-            background: #667eea;
-            color: white;
+            background: #f0f0f0;
         }
 
         .quantity-btn:disabled {
-            background: #e9ecef;
-            color: #adb5bd;
+            background: #f8f9fa;
+            color: #666;
             cursor: not-allowed;
         }
 
@@ -337,8 +220,8 @@
             width: 50px;
             height: 35px;
             text-align: center;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: bold;
             color: #333;
             background: white;
             outline: none;
@@ -347,48 +230,35 @@
         .quantity-input:focus {
             background: #f8f9fa;
         }
+
         .buy-now-form {
             margin: 0;
         }
 
         .buy-now-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
+            background: #fff;
+            color: black;
+            border: 1px solid #ccc;
             padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             min-width: 100px;
         }
 
         .buy-now-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+            background: #f0f0f0;
         }
 
         .buy-now-btn:disabled {
-            background: #6c757d !important;
+            background: #f8f9fa;
+            color: #666;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
             opacity: 0.6;
         }
 
         .buy-now-btn.loading {
-            background: #ffc107 !important;
+            background: #f0f0f0;
             cursor: wait;
-        }
-		
-        .no-orders {
-            text-align: center;
-            color: #666;
-            font-style: italic;
-            padding: 20px;
         }
 
         .no-products {
@@ -400,21 +270,6 @@
         }
 
         @media (max-width: 768px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px 15px;
-            }
-            
-            .sidebar {
-                position: static;
-                order: 2;
-            }
-            
-            .main-content {
-                order: 1;
-            }
-            
             .header-content {
                 flex-direction: column;
                 gap: 15px;
@@ -446,8 +301,8 @@
                 padding: 15px 10px;
             }
             
-            .sidebar, .main-content {
-                padding: 20px;
+            .product-info {
+                padding: 15px;
             }
         }
     </style>
@@ -464,36 +319,6 @@
     <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
     <div class="dashboard-container">
-        <aside class="sidebar">
-            <h2>Recent Orders</h2>
-            <div th:if="${totalOrders != null and not #lists.isEmpty(totalOrders)}">
-                <div th:each="order, iterStat : ${totalOrders}" 
-                     th:if="${iterStat.index lt 5}" 
-                     class="order-item">
-                    <div class="order-header">
-                        <span class="order-id">#<span th:text="${order.id}">001</span></span>
-                        <span class="order-status" 
-                              th:classappend="'status-' + ${#strings.toLowerCase(order.status != null ? order.status : 'pending')}">
-                            <span th:text="${order.status != null ? order.status : 'PENDING'}">PENDING</span>
-                        </span>
-                    </div>
-                    <div class="order-details">
-                        <div th:text="${order.orderDate != null ? #temporals.format(order.orderDate, 'MMM dd, yyyy') : 'N/A'}">Jan 15, 2025</div>
-                        <div class="order-amount">₹<span th:text="${order.totalAmount != null ? order.totalAmount : '0'}">2,999</span></div>
-                        <div th:if="${order.orderItems != null and not #lists.isEmpty(order.orderItems)}">
-                            <span th:text="${#lists.size(order.orderItems)}">3</span> items
-                        </div>
-                        <div th:if="${order.orderItems == null or #lists.isEmpty(order.orderItems)}">
-                            0 items
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div th:if="${totalOrders == null or #lists.isEmpty(totalOrders)}" class="no-orders">
-                No recent orders!
-            </div>
-        </aside>
-
         <main class="main-content">
             <h2>Available Products</h2>
             <div class="products-grid">
@@ -560,31 +385,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.product-card, .order-item');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, index * 100);
-                    }
-                });
-            });
-
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.6s ease';
-                observer.observe(card);
-            });
-
             const alerts = document.querySelectorAll('.alert');
             alerts.forEach(alert => {
                 setTimeout(() => {
                     alert.style.opacity = '0';
-                    alert.style.transform = 'translateY(-20px)';
                     setTimeout(() => {
                         alert.remove();
                     }, 300);
