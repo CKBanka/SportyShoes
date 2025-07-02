@@ -73,7 +73,7 @@ public class DataInitializer implements CommandLineRunner {
 				Product product = new Product();
 				product.setName(productNames[i]);
 				product.setDescription("High performance " + productNames[i]);
-				product.setPrice(new BigDecimal("99.99"));
+				product.setPrice(new BigDecimal("5499"));
 				product.setBrand(productBrands[i % productBrands.length]);
 				product.setSize(productSizes[i % productSizes.length]);
 				product.setColor(productColors[i % productColors.length]);
